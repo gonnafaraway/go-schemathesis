@@ -4,9 +4,7 @@
 
 <div align="center">
   <a href="https://github.com/gonnafaraway/go-schemathesis/actions/workflows/ci.yml"><img src="https://github.com/gonnafaraway/go-schemathesis/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
-  <a href="https://github.com/gonnafaraway/go-schemathesis/stargazers"><img src="https://img.shields.io/github/stars/gonnafaraway/go-schemathesis?color=00ADD8&logo=github" alt="GitHub stars" /></a>
   <a href="https://pkg.go.dev/github.com/gonnafaraway/go-schemathesis"><img src="https://img.shields.io/badge/go-1.26-00ADD8?logo=go&logoColor=white" alt="Go 1.26" /></a>
-  <a href="https://github.com/gonnafaraway/go-schemathesis/blob/main/LICENSE"><img src="https://img.shields.io/github/license/gonnafaraway/go-schemathesis?color=00ADD8" alt="License" /></a> <br>
   <img src="https://img.shields.io/badge/OpenAPI-3.0%20%7C%203.1-00ADD8?logo=openapi&logoColor=white" alt="OpenAPI 3.x" />
 </div>
 
