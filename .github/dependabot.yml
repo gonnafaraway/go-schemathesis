@@ -1,0 +1,26 @@
+version: 2
+
+updates:
+  # Dependencies are vendored, so a Dependabot pull request that only touches
+  # go.mod / go.sum WILL FAIL CI with "inconsistent vendoring" until someone runs
+  # `make vendor` and pushes the refreshed vendor/ directory. That is expected.
+  - package-ecosystem: gomod
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    labels: [dependencies, go]
+    groups:
+      # One PR for the dependency tree instead of a dozen single-bump PRs.
+      all-go-dependencies:
+        patterns: ["*"]
+        update-types: [minor, patch]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    labels: [dependencies, ci]

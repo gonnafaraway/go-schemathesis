@@ -63,11 +63,13 @@ OpenAPI schema ──▶ schema loader ──▶ case generator ──▶ concur
 
 ### Install
 
-From a tagged release:
+With Go 1.26 or newer:
 
 ```bash
 go install github.com/gonnafaraway/go-schemathesis/cmd/schemathesis@latest
 ```
+
+Or download a prebuilt binary — Linux, macOS and Windows, amd64 and arm64, published on the [releases page](https://github.com/gonnafaraway/go-schemathesis/releases) alongside a `SHA256SUMS` file to verify against.
 
 Or build from source:
 
@@ -76,8 +78,10 @@ git clone https://github.com/gonnafaraway/go-schemathesis.git
 cd go-schemathesis
 make build
 
-./bin/schemathesis --version   # schemathesis version 0.1.0
+./bin/schemathesis --version   # schemathesis version v0.1.0
 ```
+
+There is no runtime dependency: no Python, no Docker, no services to run.
 
 <details>
 <summary>Shell completion</summary>
@@ -94,6 +98,9 @@ make build
 </details>
 
 ### Run
+
+> [!WARNING]
+> **This tool attacks the API you point it at.** The `negative` and `fuzzing` phases deliberately send data that violates your schema, and some of it will reach code paths that were never meant to be reachable. Only run it against APIs you own or have permission to test, prefer a staging environment, and confirm the wiring with `--phases examples --mode positive` before widening. See the [threat model](SECURITY.md#threat-model).
 
 Point it at a schema and a running API:
 
@@ -376,36 +383,45 @@ Worth reading before you trust a green run.
 ## 🧑‍💻 Development
 
 ```bash
-make build     # -> bin/schemathesis
-make test      # go test ./...
-make lint      # golangci-lint run ./...
-make run       # go run ./cmd/schemathesis
-make tidy      # go mod tidy
-make vendor    # go mod vendor
+make build      # -> bin/schemathesis, version stamped from git describe
+make install    # -> $GOBIN/schemathesis, version stamped
+make test       # go test ./...
+make test-race  # go test -race ./...
+make lint       # golangci-lint run ./...
+make run        # go run ./cmd/schemathesis
+make tidy       # go mod tidy
+make vendor     # go mod vendor
+make clean      # rm -rf bin
 ```
 
-The test suite includes an end-to-end test that runs the full pipeline against an in-process `httptest` server (`internal/runner/runner_test.go`).
+The version reported by `--version` comes from `git describe --tags --always --dirty` and is injected with `-ldflags -X`, so a build from a tag reports that tag. Override it with `make build VERSION=v1.2.3`.
 
-Dependencies are vendored. Run `make tidy && make vendor` and commit the result together with your change.
+The test suite includes an end-to-end test that runs the full pipeline against an in-process `httptest` server (`internal/runner/runner_test.go`). Coverage is currently uneven — `internal/runner` and `internal/schema` are solid, while `internal/cli`, `internal/config`, `internal/httpx` and `internal/report` are barely tested. Adding tests there needs no behaviour change and is the easiest way to contribute.
 
-GitHub Actions runs `golangci-lint` and `go test -race` on every pull request, on every push to `main`, and when a release is published. The workflow lives in [`.github/workflows/ci.yml`](.github/workflows/ci.yml) and pulls the Go toolchain straight from `go.mod`, so the two can never drift apart.
+Dependencies are vendored. Run `make tidy && make vendor` and commit the result together with your change — a pull request that touches `go.mod` without refreshing `vendor/` fails CI.
+
+GitHub Actions runs `golangci-lint` and `go test -race` on every pull request, on every push to `main`, and when a release is published. [`.github/workflows/ci.yml`](.github/workflows/ci.yml) pulls the Go toolchain straight from `go.mod`, so the two can never drift apart. Publishing a release additionally cross-compiles binaries for six platforms and attaches them with checksums — see [`.github/workflows/release.yml`](.github/workflows/release.yml).
 
 > [!NOTE]
 > `.gitattributes` pins the working tree to LF. Git for Windows otherwise checks files out with CRLF, which makes `gofmt` — and therefore `make lint` — fail locally on every file while CI stays green.
 
 ## 🤝 Contributing
 
-Contributions are welcome.
+Contributions are welcome. The mechanics live in [CONTRIBUTING.md](CONTRIBUTING.md); this is the short version.
 
-- **Report a bug or request a feature:** open an issue at [github.com/gonnafaraway/go-schemathesis/issues](https://github.com/gonnafaraway/go-schemathesis/issues). A failing schema plus the command you ran is the most useful thing you can attach.
-- **Send a pull request:** run `make test` and `make lint` first, keep the change focused, and follow the [Uber Go Style Guide](https://github.com/uber-go/guide/blob/master/style.md).
+- **Report a bug:** use the [bug report template](https://github.com/gonnafaraway/go-schemathesis/issues/new?template=bug_report.yml). The exact command, `schemathesis --version`, the `-v` log and a minimal schema are the most useful attachments. Redact your tokens.
+- **Request a feature:** use the [feature request template](https://github.com/gonnafaraway/go-schemathesis/issues/new?template=feature_request.yml). Describe the situation rather than the solution.
+- **Send a pull request:** run `make lint` and `make test-race`, keep the change focused, fill in the template, and follow the [Uber Go Style Guide](https://github.com/uber-go/guide/blob/master/style.md).
 - **Improve the docs:** if a check surprised you or a flag was unclear, that is exactly the kind of gap worth filing.
 
-New checks belong in `internal/check` behind the registry in `registry.go`, with a test in `checks_test.go`.
+New checks belong in `internal/check` behind the registry in `registry.go`, with a test in `checks_test.go`. [CONTRIBUTING.md](CONTRIBUTING.md#adding-a-check) walks through the steps.
+
+Participation is governed by the [Code of Conduct](CODE_OF_CONDUCT.md). Because this tool generates hostile input on purpose, please read the [threat model in SECURITY.md](SECURITY.md#threat-model) before pointing it at anything you do not own — and report vulnerabilities through [GitHub Security Advisories](https://github.com/gonnafaraway/go-schemathesis/security/advisories/new), not the issue tracker.
 
 ## 📄 License
 
-Licensed under the Apache License 2.0 © [gonnafaraway](https://github.com/gonnafaraway). See [LICENSE](LICENSE) for the full text.
+Licensed under the Apache License 2.0 © [gonnafaraway](https://github.com/gonnafaraway). See [LICENSE](LICENSE) for the full text. Notable changes are recorded in [CHANGELOG.md](CHANGELOG.md).
+
 
 ## ⭐️ Stay Updated
 

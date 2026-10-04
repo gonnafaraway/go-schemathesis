@@ -1,0 +1,89 @@
+name: Bug report
+description: Something behaves differently from what the documentation says it should.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report this.
+
+        **Do not report API bugs here** — this tracker is for go-schemathesis itself.
+        A generated request that crashes *your API* is your API failing its own contract.
+
+        Never paste tokens, credentials or customer data.
+
+  - type: textarea
+    id: command
+    attributes:
+      label: Command
+      description: The exact `schemathesis run ...` invocation.
+      placeholder: |
+        schemathesis run openapi.yaml --url https://api.example.com \
+          --workers auto --mode all --phases examples,coverage,fuzzing \
+          --max-examples 50 -H "Authorization: Bearer ***"
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect to happen?
+      description: What output or behaviour were you looking for?
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: What happened instead?
+      description: >-
+        Include the report output, especially the `Tests: ...` summary line
+        and any `[n]` failure blocks.
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: Output of `schemathesis --version`.
+      placeholder: schemathesis version v0.1.0
+    validations:
+      required: true
+
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Environment
+      options:
+        - linux
+        - macos
+        - windows
+        - docker
+        - other
+    validations:
+      required: true
+
+  - type: textarea
+    id: schema
+    attributes:
+      label: Minimal schema
+      description: The smallest schema that reproduces the problem. Trim it down — a full spec is hard to read.
+      render: yaml
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Verbose log
+      description: Output of the same command with `-v` added.
+      render: shell
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checklist
+      options:
+        - label: I searched existing issues and this has not been reported.
+          required: true
+        - label: I redacted all tokens and credentials from the fields above.
+          required: true

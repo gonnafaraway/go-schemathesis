@@ -1,0 +1,56 @@
+name: Feature request
+description: Suggest a new check, generation phase, flag or output format.
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Have a look at the
+        [Known Limitations](https://github.com/gonnafaraway/go-schemathesis#%EF%B8%8F-known-limitations)
+        section first — the request may already be documented there.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      description: Describe the situation you are in, not the solution you have in mind. That usually leads to a better implementation.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: |
+        A flag, a check name, a phase name — whatever shape you imagine. An example
+        command or schema snippet helps a lot.
+      render: shell
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Including workarounds you have used so far.
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Which area does this touch?
+      options:
+        - A new check
+        - Case generation (phase or mode)
+        - CLI or configuration
+        - Output / reporting
+        - Schema or OpenAPI support
+        - Documentation
+        - Other
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Contribution
+      options:
+        - label: I am willing to open a pull request for this.
+        - label: This is a proposal for discussion, not something I need right now.

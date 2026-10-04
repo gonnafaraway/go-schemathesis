@@ -1,0 +1,9 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Questions and ideas
+    url: https://github.com/gonnafaraway/go-schemathesis/discussions
+    about: Usage questions, design discussion, and show-and-tell. Requires Discussions to be enabled in repository settings.
+  - name: Report a security vulnerability
+    url: https://github.com/gonnafaraway/go-schemathesis/security/advisories/new
+    about: Please report security issues privately. Do not open a public issue.
+    # Security advisories are always available; do not remove this link.

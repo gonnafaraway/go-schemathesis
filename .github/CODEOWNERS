@@ -1,0 +1,8 @@
+# Default owners for everything in the repository.
+* @gonnafaraway
+
+# Security-sensitive surface: changes here affect what gets sent to the API under
+# test and what gets printed in the report.
+/internal/httpx/     @gonnafaraway
+/internal/report/    @gonnafaraway
+/internal/casegen/   @gonnafaraway
