@@ -3,7 +3,10 @@
 </h1>
 
 <div align="center">
+  <a href="https://github.com/gonnafaraway/go-schemathesis/actions/workflows/ci.yml"><img src="https://github.com/gonnafaraway/go-schemathesis/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
+  <a href="https://github.com/gonnafaraway/go-schemathesis/stargazers"><img src="https://img.shields.io/github/stars/gonnafaraway/go-schemathesis?color=00ADD8&logo=github" alt="GitHub stars" /></a>
   <a href="https://pkg.go.dev/github.com/gonnafaraway/go-schemathesis"><img src="https://img.shields.io/badge/go-1.26-00ADD8?logo=go&logoColor=white" alt="Go 1.26" /></a>
+  <a href="https://github.com/gonnafaraway/go-schemathesis/blob/main/LICENSE"><img src="https://img.shields.io/github/license/gonnafaraway/go-schemathesis?color=00ADD8" alt="License" /></a> <br>
   <img src="https://img.shields.io/badge/OpenAPI-3.0%20%7C%203.1-00ADD8?logo=openapi&logoColor=white" alt="OpenAPI 3.x" />
 </div>
 
@@ -384,6 +387,11 @@ make vendor    # go mod vendor
 The test suite includes an end-to-end test that runs the full pipeline against an in-process `httptest` server (`internal/runner/runner_test.go`).
 
 Dependencies are vendored. Run `make tidy && make vendor` and commit the result together with your change.
+
+GitHub Actions runs `golangci-lint` and `go test -race` on every pull request, on every push to `main`, and when a release is published. The workflow lives in [`.github/workflows/ci.yml`](.github/workflows/ci.yml) and pulls the Go toolchain straight from `go.mod`, so the two can never drift apart.
+
+> [!NOTE]
+> `.gitattributes` pins the working tree to LF. Git for Windows otherwise checks files out with CRLF, which makes `gofmt` — and therefore `make lint` — fail locally on every file while CI stays green.
 
 ## 🤝 Contributing
 

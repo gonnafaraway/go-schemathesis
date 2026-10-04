@@ -1,0 +1,10 @@
+# Normalize line endings in the working tree to LF on every platform.
+#
+# Git for Windows ships core.autocrlf=true in its system config, which rewrites
+# LF blobs to CRLF on checkout. gofmt - and therefore golangci-lint - then
+# reports every file as unformatted locally while CI stays green on Linux.
+* text=auto eol=lf
+
+# These are only meaningful with CRLF, should such files ever be added.
+*.bat text eol=crlf
+*.cmd text eol=crlf
