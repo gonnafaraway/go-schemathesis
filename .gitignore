@@ -1,0 +1,10 @@
+/.idea/
+*.iml
+/bin/
+/dist/
+/coverage.out
+/coverage.html
+*.exe
+*.test
+*.out
+.DS_Store
