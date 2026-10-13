@@ -64,7 +64,7 @@ jobs:
           rm "$name"
 
       - name: Upload archive
-        uses: actions/upload-artifact@v7.0.1
+        uses: actions/upload-artifact@v7.0.2
         with:
           name: binaries-${{ matrix.goos }}-${{ matrix.goarch }}
           path: dist/*
@@ -89,7 +89,7 @@ jobs:
           cat SHA256SUMS
 
       - name: Upload checksums
-        uses: actions/upload-artifact@v7.0.1
+        uses: actions/upload-artifact@v7.0.2
         with:
           name: checksums
           path: dist/SHA256SUMS
