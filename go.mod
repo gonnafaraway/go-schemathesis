@@ -3,7 +3,7 @@ module github.com/gonnafaraway/go-schemathesis
 go 1.26
 
 require (
-	github.com/getkin/kin-openapi v0.151.0
+	github.com/getkin/kin-openapi v0.152.0
 	github.com/spf13/cobra v1.10.2
 )
 
