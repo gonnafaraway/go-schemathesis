@@ -1,5 +1,6 @@
-# github.com/getkin/kin-openapi v0.152.0
+# github.com/getkin/kin-openapi v0.153.0
 ## explicit; go 1.25
+github.com/getkin/kin-openapi/internal/nodeindex
 github.com/getkin/kin-openapi/openapi3
 # github.com/go-openapi/jsonpointer v0.22.5
 ## explicit; go 1.24.0
@@ -10,14 +11,6 @@ github.com/go-openapi/swag/jsonname
 # github.com/inconshreveable/mousetrap v1.1.0
 ## explicit; go 1.18
 github.com/inconshreveable/mousetrap
-# github.com/kr/pretty v0.3.1
-## explicit; go 1.12
-# github.com/oasdiff/yaml v0.1.1
-## explicit; go 1.25
-github.com/oasdiff/yaml
-# github.com/oasdiff/yaml3 v0.0.14
-## explicit; go 1.25
-github.com/oasdiff/yaml3
 # github.com/santhosh-tekuri/jsonschema/v6 v6.0.3
 ## explicit; go 1.21
 github.com/santhosh-tekuri/jsonschema/v6
@@ -28,6 +21,17 @@ github.com/spf13/cobra
 # github.com/spf13/pflag v1.0.9
 ## explicit; go 1.12
 github.com/spf13/pflag
+# go.yaml.in/yaml/v4 v4.0.0
+## explicit; go 1.18
+go.yaml.in/yaml/v4
+go.yaml.in/yaml/v4/internal/libyaml
+go.yaml.in/yaml/v4/internal/plugin
+go.yaml.in/yaml/v4/internal/plugin/mergekey
+go.yaml.in/yaml/v4/plugin/aliasdata
+go.yaml.in/yaml/v4/plugin/errorformat/v3
+go.yaml.in/yaml/v4/plugin/errorformat/v4
+go.yaml.in/yaml/v4/plugin/loaderlimits
+go.yaml.in/yaml/v4/plugin/mergekey
 # golang.org/x/text v0.14.0
 ## explicit; go 1.18
 golang.org/x/text/feature/plural
