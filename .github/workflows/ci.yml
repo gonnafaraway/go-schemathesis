@@ -24,7 +24,7 @@ jobs:
         uses: actions/checkout@v7.0.1
 
       - name: Set up Go
-        uses: actions/setup-go@v7.0.0
+        uses: actions/setup-go@v7.1.0
         with:
           # Reads "go 1.26" from go.mod, so the toolchain never drifts from the module.
           go-version-file: go.mod
@@ -47,7 +47,7 @@ jobs:
         uses: actions/checkout@v7.0.1
 
       - name: Set up Go
-        uses: actions/setup-go@v7.0.0
+        uses: actions/setup-go@v7.1.0
         with:
           go-version-file: go.mod
           cache: false
